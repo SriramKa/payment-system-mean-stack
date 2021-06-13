@@ -1,0 +1,13 @@
+<div class="item">
+  <header>
+    <h3>{{ item.name }}</h3>
+    <app-button
+      text="Buy now for {{ item.price }}!"
+      color="blue"
+      (btnClick)="buyItem()"
+    ></app-button>
+  </header>
+  <p>
+    {{ item.description }}
+  </p>
+</div>
