@@ -11,7 +11,16 @@ export class ItemService {
 
   constructor(private http: HttpClient) {}
 
+  get nativeWindow(): any {
+    return window;
+  }
+
   getItems(): Observable<Item[]> {
     return this.http.get<Item[]>(this.apiUrl);
+  }
+
+  placeOrder(item: Item): Observable<Object> {
+    const url: string = `${this.apiUrl}/buy/${item._id}`;
+    return this.http.post(url, item);
   }
 }

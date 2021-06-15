@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ItemService } from 'src/app/services/item.service';
 import { Item } from '../../interfaces/Item';
 
 @Component({
@@ -8,12 +9,16 @@ import { Item } from '../../interfaces/Item';
 })
 export class ItemComponent implements OnInit {
   @Input() item!: Item;
+  rzrpay!: any;
 
-  constructor() {}
+  constructor(private itemService: ItemService) {}
 
   ngOnInit(): void {}
 
   buyItem() {
-    console.log('buy');
+    this.itemService.placeOrder(this.item).subscribe((response) => {
+      this.rzrpay = new this.itemService.nativeWindow.Razorpay(response);
+      this.rzrpay.open();
+    });
   }
 }
